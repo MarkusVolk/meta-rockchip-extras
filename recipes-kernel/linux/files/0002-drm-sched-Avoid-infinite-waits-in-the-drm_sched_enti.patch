@@ -9,7 +9,7 @@ scheduled before being destroyed we end up with an infinite wait in the
 destroy path.
 
 Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+
 ---
  drivers/gpu/drm/scheduler/sched_entity.c | 3 +++
  1 file changed, 3 insertions(+)

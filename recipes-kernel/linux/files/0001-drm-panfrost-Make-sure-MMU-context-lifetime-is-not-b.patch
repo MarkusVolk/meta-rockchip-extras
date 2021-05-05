@@ -15,7 +15,7 @@ Reported-by: Icecream95 <ixn@keemail.me>
 Fixes: 7282f7645d06 ("drm/panfrost: Implement per FD address spaces")
 Cc: <stable@vger.kernel.org>
 Signed-off-by: Boris Brezillon <boris.brezillon@collabora.com>
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+
 ---
  drivers/gpu/drm/panfrost/panfrost_device.h |   8 +-
  drivers/gpu/drm/panfrost/panfrost_drv.c    |  50 ++-----
