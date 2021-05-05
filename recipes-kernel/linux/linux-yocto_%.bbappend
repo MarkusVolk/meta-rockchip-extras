@@ -27,6 +27,8 @@ SRC_URI_append_rockchip = " \
 	file://drm-allow-gpu-shutdown-on-reboot.patch \
 	file://0001-rock-pi-4-overclocking.patch \
 	file://rockchip-support-more-core-div-settings.patch \
+	file://0001-drm-panfrost-Make-sure-MMU-context-lifetime-is-not-b.patch \
+	file://0002-drm-sched-Avoid-infinite-waits-in-the-drm_sched_enti.patch \
 "
 
 
@@ -34,9 +36,8 @@ SRC_URI_append_rockchip = " \
 	file://kernel.cfg \
 	file://general-btsdio-ignore-uart-devs.patch \
 	file://general-emmc-hs400es-init-tweak.patch \
+	file://linux-020-eld-constraints-for-compressed-formats.patch \
 "
-
-RRECOMMENDS_${PN}_rockchip += "rockchip-firmware ap6256-firmware"
 
 #EXTRA_OEMAKE_rockchip += "CROSS_COMPILE_COMPAT=${STAGING_BINDIR_NATIVE}/arm-pokymllib32-linux-gnueabi/arm-pokymllib32-linux-gnueabi-"
 
