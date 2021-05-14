@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append_rockchip = " \
 	file://linux-0001-rockchip-from-5.11.patch \
-	file://linux-0002-rockchip-from-next.patch \
+	file://linux-0002-rockchip-from-5.12.patch \
 	file://linux-0003-rockchip-from-list.patch \
 	file://linux-0010-v4l2-from-list.patch \
 	file://linux-0020-drm-from-5.11.patch \
