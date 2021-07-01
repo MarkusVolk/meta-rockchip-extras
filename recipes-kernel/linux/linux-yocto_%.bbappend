@@ -1,10 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-LINUX_VERSION_rockchip = "5.10.41"
-
-SRCREV_machine_rockchip = "bb3f40e801fed14f9233749f7eaa27b105979059"
-SRCREV_meta_rockchip = "0c8702b8b92948a9d32fb05e4cbef3a45a7da633"
-
 SRC_URI_append_rockchip = " \
 	file://linux-0001-rockchip-from-5.11.patch \
 	file://linux-0002-rockchip-from-5.12.patch \
