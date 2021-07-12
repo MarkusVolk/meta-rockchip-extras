@@ -19,6 +19,7 @@ SRC_URI_append_rockchip = " \
 	file://rk3399-pcie-add-qos-register.patch \
 	file://0001-rk3399-fix-cache-hierarchy-detection.patch \
 	file://disable-mmc-power-on-shutdown.patch \
+	file://pm-disable-async-suspend.patch \
 	file://supported-inverted-jack-detect-GPIOs.patch \
 	file://run-micdetect-only-if-jack-status-asserted.patch \
 	file://rockchip-PCIe-bus-scan-delay.patch \
