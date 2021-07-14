@@ -36,6 +36,7 @@ SRC_URI_append_rockchip = " \
 
 
 SRC_URI_append_rockchip = " \
+	file://0001-hid_nintendo-add-Daniel-Ogorchocks-nintendo-switch-d.patch \
 	file://0001-arm64-defconfig-drop-obsolete-config-options.patch \
 	file://kernel.cfg \
 	file://general-btsdio-ignore-uart-devs.patch \
