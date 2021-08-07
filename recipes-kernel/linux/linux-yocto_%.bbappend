@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI_append_rockchip = " \
+SRC_URI:append:rockchip = " \
 	file://linux-0001-rockchip-from-5.11.patch \
 	file://linux-0002-rockchip-from-5.12.patch \
 	file://linux-0003-rockchip-from-5.13.patch \
@@ -35,7 +35,7 @@ SRC_URI_append_rockchip = " \
 "
 
 
-SRC_URI_append_rockchip = " \
+SRC_URI:append:rockchip = " \
 	file://0001-hid_nintendo-add-Daniel-Ogorchocks-nintendo-switch-d.patch \
 	file://0001-arm64-defconfig-drop-obsolete-config-options.patch \
 	file://kernel.cfg \

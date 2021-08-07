@@ -26,11 +26,11 @@ do_install() {
 
 PACKAGES =+ "${PN}-license"
 
-LICENSE_${PN}-license = "LICENSE.rockchip"
-FILES_${PN}-license = "${nonarch_base_libdir}/firmware/LICENSE.rockchip"
-FILES_${PN} = "${nonarch_base_libdir}/firmware"
+LICENSE:${PN}-license = "LICENSE.rockchip"
+FILES:${PN}-license = "${nonarch_base_libdir}/firmware/LICENSE.rockchip"
+FILES:${PN} = "${nonarch_base_libdir}/firmware"
 
-RDEPENDS_${PN} += "${PN}-license"
+RDEPENDS:${PN} += "${PN}-license"
 
 # Firmware files are generally not ran on the CPU, so they can be
 # allarch despite being architecture specific
