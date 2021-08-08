@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/../../files/custom-licenses/LICENSE.rockch
 
 PR = "1"
 
-SRC_URI = "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+archive/master/rockchip.tar.gz"
+SRC_URI = "https://anduin.linuxfromscratch.org/sources/linux-firmware/rockchip/dptx.bin"
 
-SRC_URI[sha256sum] = "f7e4d4f6eb84593c94e236e15b48b471795c3d7718c9e5ccd44dc41ae251e41f"
-
-
+SRC_URI[sha256sum] = "203c5f061fb5075e4ca5398f8becc74e7cc450b494af857da5400788a7eae20b"
 
 inherit allarch
 
