@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/linux-yocto-5-10:"
 
 SRC_URI:append:rockchip = " \
 	file://linux-0001-rockchip-from-5.11.patch \
@@ -32,7 +32,6 @@ SRC_URI:append:rockchip = " \
 	file://rockchip-support-more-core-div-settings.patch \
 	file://0001-drm-panfrost-Make-sure-MMU-context-lifetime-is-not-b.patch \
 	file://0002-drm-sched-Avoid-infinite-waits-in-the-drm_sched_enti.patch \
-	file://0001-rkvdec.c-fix-for-recent-headers.patch \
 "
 
 
