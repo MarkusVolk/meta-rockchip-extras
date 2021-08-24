@@ -37,6 +37,7 @@ SRC_URI:append:rockchip = " \
 
 SRC_URI:append:rockchip = " \
 	file://0001-hid_nintendo-add-Daniel-Ogorchocks-nintendo-switch-d.patch \
+	file://0001-linux-yocto-5.10-backport-hid_playstation-driver.patch \
 	file://0001-arm64-defconfig-drop-obsolete-config-options.patch \
 	file://kernel.cfg \
 	file://general-btsdio-ignore-uart-devs.patch \
