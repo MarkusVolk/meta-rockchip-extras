@@ -1,0 +1,43 @@
+From 7aa66200b75369a816f9aed65015b6c7420bedb2 Mon Sep 17 00:00:00 2001
+From: MarkusVolk <f_l_k@t-online.de>
+Date: Fri, 3 Sep 2021 19:53:21 +0200
+Subject: [PATCH] rock-pi-4: fix cpuinfo
+Signed-off-by: MarkusVolk <f_l_k@t-online.de>
+---
+ .../boot/dts/rockchip/rk3399-rock-pi-4.dtsi   | 30 ++++++++++++++++++-
+ arch/arm64/boot/dts/rockchip/rk3399.dtsi      |  6 ++++
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
+index aee4695a4f3c..b10e08c7da7a 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
+@@ -496,7 +517,7 @@ bt_wake_l: bt-wake-l {
+ 
+ 	pcie {
+ 		pcie_pwr_en: pcie-pwr-en {
+-			rockchip,pins = <2 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <2 RK_PD2 RK_FUNC_GPIO &pcfg_pull_up_20ma>;
+ 		};
+ 	};
+ 
+diff --git a/arch/arm64/boot/dts/rockchip/rk3399.dtsi b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
+index 8a1375334a13..3d467090dc7c 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3399.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
+@@ -179,6 +179,12 @@ display-subsystem {
+ 		compatible = "rockchip,display-subsystem";
+ 		ports = <&vopl_out>, <&vopb_out>;
+ 	};
++	
++	cpuinfo {
++		compatible = "rockchip,cpuinfo";
++		nvmem-cells = <&cpu_id>;
++		nvmem-cell-names = "id";
++	};
+ 
+ 	pmu_a53 {
+ 		compatible = "arm,cortex-a53-pmu";
+-- 
+2.25.1
+
