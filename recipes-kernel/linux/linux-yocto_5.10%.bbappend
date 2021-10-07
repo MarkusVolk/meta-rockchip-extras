@@ -30,7 +30,6 @@ SRC_URI:append:rockchip = " \
 	file://drm-allow-gpu-shutdown-on-reboot.patch \
 	file://0001-rock-pi-4-overclocking.patch \
 	file://rockchip-support-more-core-div-settings.patch \
-	file://0001-drm-panfrost-Make-sure-MMU-context-lifetime-is-not-b.patch \
 	file://0002-drm-sched-Avoid-infinite-waits-in-the-drm_sched_enti.patch \
 	file://0001-rock-pi-4-fix-cpuinfo.patch \
 	file://clk-rockchip-export-ACLK_VCODEC-for-RK3036.patch \
