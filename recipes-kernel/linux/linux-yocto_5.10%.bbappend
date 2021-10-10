@@ -34,6 +34,9 @@ SRC_URI:append:rockchip = " \
 	file://0001-rock-pi-4-fix-cpuinfo.patch \
 	file://clk-rockchip-export-ACLK_VCODEC-for-RK3036.patch \
 	file://Updates-for-Radxa-ROCK-Pi-4.patch \
+	file://0001-rock-pi-4b-c-fix-bluetooth-audio-distortion.patch \
+	file://0001-rk3399-rock-pi-4.dtsi-use-only-supported-PCIe-link-s.patch \
+	file://arm64-dts-rockchip-rk3399-Hook-up-DMA-for-UARTs.patch \
 "
 
 
