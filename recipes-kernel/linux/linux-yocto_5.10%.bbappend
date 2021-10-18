@@ -37,8 +37,11 @@ SRC_URI:append:rockchip = " \
 	file://0001-rock-pi-4b-c-fix-bluetooth-audio-distortion.patch \
 	file://0001-rk3399-rock-pi-4.dtsi-use-only-supported-PCIe-link-s.patch \
 	file://arm64-dts-rockchip-rk3399-Hook-up-DMA-for-UARTs.patch \
+	file://1-3-drm-rockchip-define-gamma-registers-for-RK3399.patch \
+	file://2-3-drm-rockchip-support-gamma-control-on-RK3399.patch \
+	file://3-3-arm64-dts-rockchip-enable-gamma-control-on-RK3399.patch \
+	file://drm-rockchip-vop-Add-timeout-for-DSP-hold.patch \
 "
-
 
 SRC_URI:append:rockchip = " \
 	file://0001-hid_nintendo-add-Daniel-Ogorchocks-nintendo-switch-d.patch \
