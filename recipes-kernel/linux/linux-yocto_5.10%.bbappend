@@ -31,7 +31,6 @@ SRC_URI:append:rockchip = " \
 	file://0001-rock-pi-4-overclocking.patch \
 	file://rockchip-support-more-core-div-settings.patch \
 	file://0002-drm-sched-Avoid-infinite-waits-in-the-drm_sched_enti.patch \
-	file://0001-rock-pi-4-fix-cpuinfo.patch \
 	file://clk-rockchip-export-ACLK_VCODEC-for-RK3036.patch \
 	file://Updates-for-Radxa-ROCK-Pi-4.patch \
 	file://0001-rock-pi-4b-c-fix-bluetooth-audio-distortion.patch \
@@ -41,6 +40,9 @@ SRC_URI:append:rockchip = " \
 	file://2-3-drm-rockchip-support-gamma-control-on-RK3399.patch \
 	file://3-3-arm64-dts-rockchip-enable-gamma-control-on-RK3399.patch \
 	file://drm-rockchip-vop-Add-timeout-for-DSP-hold.patch \
+	file://drm-Fix-wrong-use-of-connector-in-vop_get_edp_connector.patch \
+	file://1-2-arm64-dts-rockchip-fix-audio-supply-for-Rock-Pi-4.patch \
+	file://2-2-arm64-dts-rockchip-add-interrupt-and-headphone-detection-for-Rock-Pi4-s-audio-codec.patch \
 "
 
 SRC_URI:append:rockchip = " \
