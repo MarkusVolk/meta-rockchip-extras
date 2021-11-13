@@ -1,58 +1,70 @@
-From f11f9299420668794e7c37d836d6cdf2431a6492 Mon Sep 17 00:00:00 2001
-From: MarkusVolk <f_l_k@t-online.de>
-Date: Sun, 10 Oct 2021 14:15:05 +0200
-Subject: [PATCH] rock-pi-4b/c: fix bluetooth audio distortion
-
-Signed-off-by: MarkusVolk <f_l_k@t-online.de>
----
- arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b-plus.dts | 2 ++
- arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b.dts      | 2 ++
- arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4c.dts      | 2 ++
- 3 files changed, 6 insertions(+)
-
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b-plus.dts b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b-plus.dts
-index dfad13d2ab24..74ecaa6b6adf 100644
+index dfad13d2ab24..5bd2b8db3d51 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b-plus.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b-plus.dts
-@@ -41,7 +41,9 @@ bluetooth {
+@@ -35,13 +35,16 @@ &uart0 {
+ 	status = "okay";
+ 
+ 	bluetooth {
+-		compatible = "brcm,bcm43438-bt";
++		compatible = "brcm,bcm4345c5";
+ 		clocks = <&rk808 1>;
+-		clock-names = "ext_clock";
++		clock-names = "lpo";
  		device-wakeup-gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
  		host-wakeup-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>;
  		shutdown-gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_HIGH>;
-+		max-speed = <3000000>;
++		max-speed = <1500000>;
  		pinctrl-names = "default";
  		pinctrl-0 = <&bt_host_wake_l &bt_wake_l &bt_enable_h>;
 +		vbat-supply = <&vcc3v3_sys>;
++		vddio-supply = <&vcc_1v8>;
  	};
  };
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b.dts b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b.dts
-index f0055ce2fda0..06a7bc895a98 100644
+index 6c63e617063c..cf48746a3ad8 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4b.dts
-@@ -36,7 +36,9 @@ bluetooth {
+@@ -34,13 +34,16 @@ &uart0 {
+ 	status = "okay";
+ 
+ 	bluetooth {
+-		compatible = "brcm,bcm43438-bt";
++		compatible = "brcm,bcm4345c5";
+ 		clocks = <&rk808 1>;
+-		clock-names = "ext_clock";
++		clock-names = "lpo";
  		device-wakeup-gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
  		host-wakeup-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>;
  		shutdown-gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_HIGH>;
-+		max-speed = <3000000>;
++		max-speed = <1500000>;
  		pinctrl-names = "default";
  		pinctrl-0 = <&bt_host_wake_l &bt_wake_l &bt_enable_h>;
 +		vbat-supply = <&vcc3v3_sys>;
++		vddio-supply = <&vcc_1v8>;
  	};
  };
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4c.dts b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4c.dts
-index 4c7ebb1c5d2d..5bbe2666b4af 100644
+index 99169bcd51c0..57ddf55ee693 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4c.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4c.dts
-@@ -37,8 +37,10 @@ bluetooth {
+@@ -35,14 +35,17 @@ &uart0 {
+ 	status = "okay";
+ 
+ 	bluetooth {
+-		compatible = "brcm,bcm43438-bt";
++		compatible = "brcm,bcm4345c5";
+ 		clocks = <&rk808 1>;
+-		clock-names = "ext_clock";
++		clock-names = "lpo";
  		device-wakeup-gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
  		host-wakeup-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>;
  		shutdown-gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_HIGH>;
-+		max-speed = <3000000>;
++		max-speed = <1500000>;
  		pinctrl-names = "default";
  		pinctrl-0 = <&bt_host_wake_l &bt_wake_l &bt_enable_h>;
 +		vbat-supply = <&vcc3v3_sys>;
++		vddio-supply = <&vcc_1v8>;
  	};
  };
  
--- 
-2.25.1
-
