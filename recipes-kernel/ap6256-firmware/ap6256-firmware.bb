@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${THISDIR}/../../files/custom-licenses/LICENSE.broadc
 
 PR = "1"
 
-SRC_URI = "git://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware.git;protocol=https \
+SRC_URI = "git://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware.git;protocol=https;branch=master \
 "
 
 S = "${WORKDIR}/git"
