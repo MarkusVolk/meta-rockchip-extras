@@ -39,6 +39,7 @@ SRC_URI:append:rockchip = " \
 	file://rockchip/general-btsdio-ignore-uart-devs.patch \
 	file://rockchip/run-micdetect-only-if-jack-status-asserted.patch \
 	file://rockchip/supported-inverted-jack-detect-GPIOs.patch \
+	file://rockchip/media-hantro-Hook-up-RK3399-JPEG-encoder-output.patch \
 "
 
 #EXTRA_OEMAKE_rockchip += "CROSS_COMPILE_COMPAT=${STAGING_BINDIR_NATIVE}/arm-pokymllib32-linux-gnueabi/arm-pokymllib32-linux-gnueabi-"
