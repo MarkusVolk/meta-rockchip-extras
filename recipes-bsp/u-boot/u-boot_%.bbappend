@@ -1,3 +1,3 @@
-PV = "2021.07"
-SRCREV = "v${PV}"
+PV:rockchip = "2021.07"
+SRCREV:rockchip = "v${PV}"
 
