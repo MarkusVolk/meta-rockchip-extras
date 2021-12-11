@@ -23,7 +23,6 @@ SRC_URI:append:rockchip = " \
 	file://libreelec/linux-062-imon_pad_ignore_diagonal.patch \
 	file://libreelec/linux-999.02-0001-pm-disable-async-suspend-resume-by-default.patch \
 	file://libreelec/linux-999-no-lzma-in-x86-perf-build.patch \
-	file://rockchip/0001-media-rkvdec-Support-dynamic-resolution-changes.patch \
 	file://rockchip/0001-rk3399-fix-cache-hierarchy-detection.patch \
 	file://rockchip/0001-rock-pi-4b-c-fix-bluetooth-audio-distortion.patch \
 	file://rockchip/0001-rock-pi-4-overclocking.patch \
