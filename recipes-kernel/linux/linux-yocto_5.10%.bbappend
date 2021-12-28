@@ -43,7 +43,6 @@ SRC_URI:append:rockchip = " \
 	file://drm-Fix-wrong-use-of-connector-in-vop_get_edp_connector.patch \
 	file://1-2-arm64-dts-rockchip-fix-audio-supply-for-Rock-Pi-4.patch \
 	file://2-2-arm64-dts-rockchip-add-interrupt-and-headphone-detection-for-Rock-Pi4-s-audio-codec.patch \
-	file://0001-media-rkvdec-Support-dynamic-resolution-changes.patch \
 	file://drm-prime-gem-drm_gem_object_release_handle-by-handle.patch \
 "
 
