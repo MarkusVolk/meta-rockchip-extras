@@ -1,3 +1,3 @@
 PV:rockchip = "2021.07"
-SRCREV:rockchip = "v${PV}"
+SRCREV:rockchip = "840658b093976390e9537724f802281c9c8439f5"
 
