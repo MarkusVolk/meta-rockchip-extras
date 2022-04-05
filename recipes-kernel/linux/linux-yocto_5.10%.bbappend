@@ -4,14 +4,14 @@ SRC_URI:append:rockchip = " \
 	file://linux-0001-rockchip-from-5.11.patch \
 	file://linux-0002-rockchip-from-5.12.patch \
 	file://linux-0003-rockchip-from-5.13.patch \
-	file://linux-0003-rockchip-from-next.patch \
-	file://linux-0004-rockchip-from-list.patch \
+	file://linux-0004-rockchip-from-next.patch \
+	file://linux-0005-rockchip-from-list.patch \
 	file://linux-0010-v4l2-from-list.patch \
 	file://linux-0020-drm-from-5.11.patch \
 	file://linux-0021-drm-from-list.patch \
-	file://linux-1001-drm-rockchip.patch \
-	file://linux-1002-v4l2-rockchip.patch \
-	file://linux-1003-for-libreelec.patch \
+	file://linux-1000-drm-rockchip.patch \
+	file://linux-1001-v4l2-rockchip.patch \
+	file://linux-1002-for-libreelec.patch \
 	file://linux-2000-v4l-wip-rkvdec-vp9.patch \
 	file://linux-2001-v4l-wip-rkvdec-hevc.patch \
 	file://linux-2002-v4l-wip-iep-driver.patch \

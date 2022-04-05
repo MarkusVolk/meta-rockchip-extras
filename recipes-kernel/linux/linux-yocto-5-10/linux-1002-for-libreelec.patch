@@ -1,78 +1,79 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alex Bee <knaerzche@gmail.com>
-Date: Sat, 16 Jan 2021 12:24:58 +0000
-Subject: [PATCH] arm64: dts: rockchip: enable USB3 for supported RK3328 boards
+Date: Wed, 2 Sep 2020 19:52:02 +0200
+Subject: [PATCH] arm64: dts: rockchip: add gpu powerdomain, gpu opp-table and
+ cooling cell for RK3328
+
+Note: since the regulator that supplies the GPU usually also supplies
+other SoC components, we have to make sure voltage is never lower then
+1050 mV - also disable 500 MHz for now, since it will crash if rkvdec
+is running at the same time (voltage to high)
 
 Signed-off-by: Alex Bee <knaerzche@gmail.com>
 ---
- arch/arm64/boot/dts/rockchip/rk3328-a1.dts    | 21 +++++++++++++++++++
- .../arm64/boot/dts/rockchip/rk3328-rock64.dts | 21 +++++++++++++++++++
- 2 files changed, 42 insertions(+)
+ arch/arm64/boot/dts/rockchip/rk3328.dtsi | 34 ++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-index 37f307cfa4cc..4013f16bb368 100644
---- a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-+++ b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-@@ -352,6 +352,27 @@ &usb_host0_ehci {
- 	status = "okay";
- };
+diff --git a/arch/arm64/boot/dts/rockchip/rk3328.dtsi b/arch/arm64/boot/dts/rockchip/rk3328.dtsi
+index 91aaedccec90..9ec15415d30e 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3328.dtsi
++++ b/arch/arm64/boot/dts/rockchip/rk3328.dtsi
+@@ -321,6 +321,10 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
  
-+&usbdrd3 {
-+	status = "okay";
-+};
-+
-+&usbdrd_dwc3 {
-+	dr_mode = "host";
-+	status = "okay";
-+};
-+
-+&usb3phy {
-+	status = "okay";
-+};
-+
-+&usb3phy_utmi {
-+	status = "okay";
-+};
-+
-+&usb3phy_pipe {
-+	status = "okay";
-+};
-+
- &vop {
- 	status = "okay";
- };
-diff --git a/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts b/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
-index c984662043da..89fde87f7650 100644
---- a/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
-+++ b/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
-@@ -384,6 +384,27 @@ &usb_host0_ohci {
- 	status = "okay";
- };
++			power-domain@RK3328_PD_GPU {
++				reg = <RK3328_PD_GPU>;
++				clocks = <&cru ACLK_GPU>;
++			};
+ 			power-domain@RK3328_PD_HEVC {
+ 				reg = <RK3328_PD_HEVC>;
+ 			};
+@@ -546,6 +550,11 @@
+ 							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+ 					contribution = <4096>;
+ 				};
++				map1 {
++					trip = <&target>;
++					cooling-device = <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++					contribution = <4096>;
++				};
+ 			};
+ 		};
  
-+&usbdrd3 {
-+	status = "okay";
-+};
+@@ -627,7 +636,32 @@
+ 				  "ppmmu1";
+ 		clocks = <&cru ACLK_GPU>, <&cru ACLK_GPU>;
+ 		clock-names = "bus", "core";
++		operating-points-v2 = <&gpu_opp_table>;
++		power-domains = <&power RK3328_PD_GPU>;
+ 		resets = <&cru SRST_GPU_A>;
++		#cooling-cells = <2>;
++	};
 +
-+&usbdrd_dwc3 {
-+	dr_mode = "host";
-+	status = "okay";
-+};
++	gpu_opp_table: gpu-opp-table {
++		compatible = "operating-points-v2";
 +
-+&usb3phy {
-+	status = "okay";
-+};
-+
-+&usb3phy_utmi {
-+	status = "okay";
-+};
-+
-+&usb3phy_pipe {
-+	status = "okay";
-+};
-+
- &vop {
- 	status = "okay";
- };
++		opp-200000000 {
++			opp-hz = /bits/ 64 <200000000>;
++			opp-microvolt = <1050000>;
++		};
++		opp-300000000 {
++			opp-hz = /bits/ 64 <300000000>;
++			opp-microvolt = <1050000>;
++		};
++		opp-400000000 {
++			opp-hz = /bits/ 64 <400000000>;
++			opp-microvolt = <1050000>;
++		};
++		opp-500000000 {
++			opp-hz = /bits/ 64 <500000000>;
++			opp-microvolt = <1150000>;
++			status = "disabled";
++		};
+ 	};
+ 
+ 	h265e_mmu: iommu@ff330200 {
 
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alex Bee <knaerzche@gmail.com>
@@ -85,11 +86,11 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
  1 file changed, 14 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328.dtsi b/arch/arm64/boot/dts/rockchip/rk3328.dtsi
-index 21e32ddb21a0..18d663aacd07 100644
+index 9ec15415d30e..2ac2c22befb7 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3328.dtsi
-@@ -1109,6 +1109,20 @@ usbdrd_dwc3: dwc3@ff600000 {
- 		};
+@@ -1064,6 +1064,20 @@
+ 		status = "disabled";
  	};
  
 +	sdmmc_ext: dwmmc@ff5f0000 {
@@ -124,7 +125,7 @@ diff --git a/arch/arm/boot/dts/rk3288-miqi.dts b/arch/arm/boot/dts/rk3288-miqi.d
 index 713f55e143c6..8d30c49f406e 100644
 --- a/arch/arm/boot/dts/rk3288-miqi.dts
 +++ b/arch/arm/boot/dts/rk3288-miqi.dts
-@@ -78,6 +78,21 @@ vcc_sys: vsys-regulator {
+@@ -78,6 +78,21 @@
  		regulator-always-on;
  		regulator-boot-on;
  	};
@@ -146,7 +147,7 @@ index 713f55e143c6..8d30c49f406e 100644
  };
  
  &cpu0 {
-@@ -284,6 +299,11 @@ &i2c5 {
+@@ -284,6 +299,11 @@
  	status = "okay";
  };
  
@@ -174,7 +175,7 @@ diff --git a/arch/arm/boot/dts/rk3288-tinker.dtsi b/arch/arm/boot/dts/rk3288-tin
 index 9c1e38c54eae..ee332fc9cf1f 100644
 --- a/arch/arm/boot/dts/rk3288-tinker.dtsi
 +++ b/arch/arm/boot/dts/rk3288-tinker.dtsi
-@@ -75,7 +75,7 @@ sdio_pwrseq: sdio-pwrseq {
+@@ -75,7 +75,7 @@
  	sound {
  		compatible = "simple-audio-card";
  		simple-audio-card,format = "i2s";
@@ -184,10 +185,10 @@ index 9c1e38c54eae..ee332fc9cf1f 100644
  
  		simple-audio-card,codec {
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399.dtsi b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
-index 03c6737ca0ea..9c2ac03c154b 100644
+index 59b69f069b0c..215b37ee5aaa 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
-@@ -1782,7 +1782,7 @@ hdmi_sound: hdmi-sound {
+@@ -1782,7 +1782,7 @@
  		compatible = "simple-audio-card";
  		simple-audio-card,format = "i2s";
  		simple-audio-card,mclk-fs = <256>;
@@ -376,14 +377,13 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
 ---
  arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts | 4 ++++
  arch/arm64/boot/dts/rockchip/rk3328-rock64.dts | 4 ++++
- arch/arm64/boot/dts/rockchip/rk3328.dtsi       | 2 +-
- 3 files changed, 9 insertions(+), 1 deletion(-)
+ 2 files changed, 8 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-index 3ac876c08d61..8607514437f5 100644
+index 7d9481962f51..b6542d3fb311 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-@@ -161,6 +161,10 @@ &gmac2io {
+@@ -161,6 +161,10 @@
  	status = "okay";
  };
  
@@ -395,10 +395,10 @@ index 3ac876c08d61..8607514437f5 100644
  	status = "okay";
  };
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts b/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
-index 89fde87f7650..bd62349a9390 100644
+index ecf3fcf24ff3..49582172d49b 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-rock64.dts
-@@ -157,6 +157,10 @@ &gmac2io {
+@@ -157,6 +157,10 @@
  	status = "okay";
  };
  
@@ -409,6 +409,7 @@ index 89fde87f7650..bd62349a9390 100644
  &hdmi {
  	status = "okay";
  };
+
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Alex Bee <knaerzche@gmail.com>
 Date: Sun, 2 May 2021 20:44:21 +0200
@@ -425,7 +426,7 @@ diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rockpro64.dtsi b/arch/arm64/boo
 index 58097245994a..c7c515c6c5cb 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rockpro64.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rockpro64.dtsi
-@@ -247,8 +247,8 @@ &gmac {
+@@ -247,8 +247,8 @@
  	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
  	snps,reset-active-low;
  	snps,reset-delays-us = <0 10000 50000>;
@@ -450,10 +451,10 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
  2 files changed, 46 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-index 4013f16bb368..1bb3f4a6e496 100644
+index 37f307cfa4cc..68f7c76a3a56 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-@@ -52,6 +52,24 @@ ir-receiver {
+@@ -52,6 +52,24 @@
  		gpios = <&gpio2 RK_PA2 GPIO_ACTIVE_LOW>;
  		linux,rc-map-name = "rc-beelink-gs1";
  	};
@@ -478,7 +479,7 @@ index 4013f16bb368..1bb3f4a6e496 100644
  };
  
  &analog_sound {
-@@ -319,6 +337,11 @@ &sdmmc {
+@@ -319,6 +337,11 @@
  	status = "okay";
  };
  
@@ -491,10 +492,10 @@ index 4013f16bb368..1bb3f4a6e496 100644
  	rockchip,hw-tshut-mode = <0>;
  	rockchip,hw-tshut-polarity = <0>;
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-index 8607514437f5..6ca08854aef3 100644
+index b6542d3fb311..9826d0f574f8 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-@@ -102,6 +102,24 @@ user_led: led-1 {
+@@ -102,6 +102,24 @@
  			mode = <0x05>;
  		};
  	};
@@ -519,7 +520,7 @@ index 8607514437f5..6ca08854aef3 100644
  };
  
  &analog_sound {
-@@ -337,6 +355,11 @@ &sdmmc {
+@@ -337,6 +355,11 @@
  	status = "okay";
  };
  
@@ -543,10 +544,10 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
  1 file changed, 14 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-index 6ca08854aef3..fb21ad1324bc 100644
+index 9826d0f574f8..ea5b606f2dde 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-roc-cc.dts
-@@ -83,6 +83,13 @@ vcc_phy: vcc-phy-regulator {
+@@ -83,6 +83,13 @@
  		regulator-boot-on;
  	};
  
@@ -560,7 +561,7 @@ index 6ca08854aef3..fb21ad1324bc 100644
  	leds {
  		compatible = "gpio-leds";
  
-@@ -325,6 +332,13 @@ &io_domains {
+@@ -325,6 +332,13 @@
  };
  
  &pinctrl {
@@ -588,7 +589,7 @@ diff --git a/arch/arm/boot/dts/rk3288-miqi.dts b/arch/arm/boot/dts/rk3288-miqi.d
 index 8d30c49f406e..6d90db5a3b75 100644
 --- a/arch/arm/boot/dts/rk3288-miqi.dts
 +++ b/arch/arm/boot/dts/rk3288-miqi.dts
-@@ -145,6 +145,8 @@ &gpu {
+@@ -145,6 +145,8 @@
  
  &hdmi {
  	ddc-i2c-bus = <&i2c5>;
@@ -608,10 +609,10 @@ Subject: [PATCH] HACK: arm64: dts: enable FE phy for Beelink A1 also
  1 file changed, 8 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-index 1bb3f4a6e496..99f28dac0791 100644
+index 68f7c76a3a56..47520938d3a3 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3328-a1.dts
-@@ -142,6 +142,14 @@ rtl8211f: ethernet-phy@0 {
+@@ -142,6 +142,14 @@
  	};
  };
  
@@ -701,10 +702,10 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399.dtsi b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
-index 9c2ac03c154b..b1c7ee80d255 100644
+index 215b37ee5aaa..ad72d1796542 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399.dtsi
-@@ -1390,7 +1390,7 @@ cru: clock-controller@ff760000 {
+@@ -1390,7 +1390,7 @@
  			<1000000000>,
  			 <150000000>,   <75000000>,
  			  <37500000>,
@@ -728,10 +729,10 @@ Signed-off-by: Alex Bee <knaerzche@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
-index fb7599f07af4..155f22b53103 100644
+index c5d4463e4c93..05788f57a2a4 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rock-pi-4.dtsi
-@@ -593,6 +593,7 @@ &sdmmc {
+@@ -621,6 +621,7 @@
  
  &sdhci {
  	bus-width = <8>;
@@ -754,7 +755,7 @@ diff --git a/arch/arm64/boot/dts/rockchip/rk3399pro-rock-pi-n10.dts b/arch/arm64
 index 369de5dc0ebd..48ac0cfa93c0 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399pro-rock-pi-n10.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399pro-rock-pi-n10.dts
-@@ -20,3 +20,7 @@ chosen {
+@@ -20,3 +20,7 @@
  		stdout-path = "serial2:1500000n8";
  	};
  };
@@ -766,7 +767,7 @@ diff --git a/arch/arm64/boot/dts/rockchip/rk3399pro-vmarc-som.dtsi b/arch/arm64/
 index 7257494d2831..9e2994e27d05 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399pro-vmarc-som.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399pro-vmarc-som.dtsi
-@@ -57,6 +57,22 @@ &hdmi {
+@@ -57,6 +57,22 @@
  	pinctrl-0 = <&hdmi_cec>;
  };
  
@@ -789,7 +790,7 @@ index 7257494d2831..9e2994e27d05 100644
  &i2c0 {
  	clock-frequency = <400000>;
  	i2c-scl-falling-time-ns = <30>;
-@@ -280,6 +296,50 @@ regulator-state-mem {
+@@ -280,6 +296,50 @@
  			};
  		};
  	};
@@ -840,7 +841,7 @@ index 7257494d2831..9e2994e27d05 100644
  };
  
  &i2c1 {
-@@ -351,6 +411,29 @@ pmic {
+@@ -351,6 +411,29 @@
  		pmic_int_l: pmic-int-l {
  			rockchip,pins = <1 RK_PC2 0 &pcfg_pull_up>;
  		};

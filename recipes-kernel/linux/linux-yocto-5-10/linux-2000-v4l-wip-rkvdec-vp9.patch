@@ -38,7 +38,7 @@ index 7869b6f6ff72..6b4a83b053f5 100644
 +
 +:author:    Adrian Grange (Google), Peter de Rivaz (Argon Design), Jonathan Hunt (Argon Design)
 diff --git a/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst b/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
-index ce728c757eaf..456488f2b5ca 100644
+index b864869b42bc..3217c5fc421a 100644
 --- a/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
 +++ b/Documentation/userspace-api/media/v4l/ext-ctrls-codec.rst
 @@ -2730,6 +2730,556 @@ enum v4l2_mpeg_video_h264_hierarchical_coding_type -
@@ -877,10 +877,10 @@ index 41f8410d08d6..7ed11f296008 100644
  		elem_size = sizeof(struct v4l2_ctrl_hevc_sps);
  		break;
 diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
-index 1ff68c1bf14a..783733bef2da 100644
+index b570fa7e6fc8..a3c3677cd4bd 100644
 --- a/drivers/media/v4l2-core/v4l2-ioctl.c
 +++ b/drivers/media/v4l2-core/v4l2-ioctl.c
-@@ -1429,6 +1429,7 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
+@@ -1447,6 +1447,7 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
  		case V4L2_PIX_FMT_VP8:		descr = "VP8"; break;
  		case V4L2_PIX_FMT_VP8_FRAME:    descr = "VP8 Frame"; break;
  		case V4L2_PIX_FMT_VP9:		descr = "VP9"; break;
@@ -1425,9 +1425,9 @@ Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
 ---
  drivers/staging/media/rkvdec/Makefile     |    2 +-
  drivers/staging/media/rkvdec/rkvdec-vp9.c | 1577 +++++++++++++++++++++
- drivers/staging/media/rkvdec/rkvdec.c     |   60 +-
+ drivers/staging/media/rkvdec/rkvdec.c     |   49 +
  drivers/staging/media/rkvdec/rkvdec.h     |    6 +
- 4 files changed, 1643 insertions(+), 2 deletions(-)
+ 4 files changed, 1633 insertions(+), 1 deletion(-)
  create mode 100644 drivers/staging/media/rkvdec/rkvdec-vp9.c
 
 diff --git a/drivers/staging/media/rkvdec/Makefile b/drivers/staging/media/rkvdec/Makefile
@@ -3023,7 +3023,7 @@ index 000000000000..8b443ed511c9
 +	.done = rkvdec_vp9_done,
 +};
 diff --git a/drivers/staging/media/rkvdec/rkvdec.c b/drivers/staging/media/rkvdec/rkvdec.c
-index c4e0ec16c285..f3578c5ea902 100644
+index 3752acd6d370..2b495781c742 100644
 --- a/drivers/staging/media/rkvdec/rkvdec.c
 +++ b/drivers/staging/media/rkvdec/rkvdec.c
 @@ -162,6 +162,40 @@ static const u32 rkvdec_h264_decoded_fmts[] = {
