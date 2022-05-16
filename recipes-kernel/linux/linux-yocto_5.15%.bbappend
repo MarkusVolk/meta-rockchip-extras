@@ -2,7 +2,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/linux-yocto-5-15:"
 
 SRC_URI:append:rockchip = " \
 	file://kernel.cfg \
-	file://0001-hid_nintendo-add-Daniel-Ogorchocks-nintendo-switch-d.patch \
 "
 
 SRC_URI:append:rockchip = " \
