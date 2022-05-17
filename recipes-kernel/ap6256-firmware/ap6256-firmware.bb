@@ -24,15 +24,15 @@ do_install() {
 	install -m644 ${S}/BCM4345C5.hcd ${D}${nonarch_base_libdir}/firmware/brcm/BCM.hcd
 	install -m644 ${S}/BCM4345C5.hcd ${D}${nonarch_base_libdir}/firmware/brcm
 	# Wifi firmware
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.txt
 	install -m644 ${S}/fw_bcm43456c5_ag.bin ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.bin
 	install -m644 ${S}/brcmfmac43456-sdio.clm_blob ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.clm_blob
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4b.txt
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4c.txt
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,rockpro64-v2.1.txt
-	install -m644 ${S}/nvram_ap6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.rockchip,rk3399-orangepi.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4b.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4c.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,rockpro64-v2.1.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.rockchip,rk3399-orangepi.txt
 	install -m644 ${THISDIR}/../../files/custom-licenses/LICENSE.broadcom_bcm43xx ${D}${nonarch_base_libdir}/firmware/LICENSE.broadcom_bcm43xx
 }
 
