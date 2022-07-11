@@ -7,14 +7,13 @@ SRC_URI:append:rockchip = " \
 SRC_URI:append:rockchip = " \
 	file://libreelec/linux-0001-rockchip-from-5.16.patch \
 	file://libreelec/linux-0002-rockchip-from-list.patch \
+	file://libreelec/linux-0010-v4l2-from-5.17.patch \
 	file://libreelec/linux-0011-v4l2-from-list.patch \
 	file://libreelec/linux-0020-drm-from-list.patch \
-	file://libreelec/linux-1000-drm-rockchip.patch \
 	file://libreelec/linux-1001-v4l2-rockchip.patch \
 	file://libreelec/linux-1002-for-libreelec.patch \
-	file://libreelec/linux-2000-v4l-wip-rkvdec-vp9.patch \
-	file://libreelec/linux-2001-v4l-wip-rkvdec-hevc.patch \
-	file://libreelec/linux-2002-v4l-wip-iep-driver.patch \
+	file://libreelec/linux-2000-v4l2-wip-rkvdec-hevc.patch \
+	file://libreelec/linux-2001-v4l2-wip-iep-driver.patch \
 	file://libreelec/linux-020-eld-constraints-for-compressed-formats.patch \
 	file://libreelec/linux-051-ouya_controller_support.patch \
 	file://libreelec/linux-058.05-hid_sony-add_autorepeat_for_PS3_remotes.patch \

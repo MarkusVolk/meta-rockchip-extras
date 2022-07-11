@@ -29,6 +29,7 @@ do_install() {
 	install -m644 ${S}/fw_bcm43456c5_ag.bin ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.bin
 	install -m644 ${S}/brcmfmac43456-sdio.clm_blob ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.clm_blob
 	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4b.txt
+	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4b-plus.txt
 	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.radxa,rockpi4c.txt
 	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt
 	install -m644 ${S}/brcmfmac43456-sdio.AP6256.txt ${D}${nonarch_base_libdir}/firmware/brcm/brcmfmac43456-sdio.pine64,rockpro64-v2.1.txt
